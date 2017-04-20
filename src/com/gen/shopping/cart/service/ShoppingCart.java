@@ -1,8 +1,5 @@
 package com.gen.shopping.cart.service;
 
-import java.util.List;
-
-import com.gen.shopping.cart.model.Product;
 import com.gen.shopping.cart.model.Selected;
 
 public interface ShoppingCart {
