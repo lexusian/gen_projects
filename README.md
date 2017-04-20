@@ -26,7 +26,7 @@ This content is configurable for each product, in addition you can control the p
 
 "A 3 for 2 deal on Unlimited 1GB Sims. So for example, if you buy 3 Unlimited 1GB Sims, you will pay the price of 2 only for the first
 month."
-instead of buying 3 Unlimited 1gb sims to avail to pay only for two then you change it to 4 by simply changing the ult_small_disc_count field and set it to 4.
+instead of buying 3 Unlimited 1gb sims just to avail to pay only for two , then you change whatever number you want by simply changing the ult_small_disc_count field and set it to 4. Same goes to other rules in other promotions.
 
 
 
