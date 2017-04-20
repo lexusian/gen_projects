@@ -6,10 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.gen.shopping.cart.bo.Promo;
 import com.gen.shopping.cart.constants.Constants;
 import com.gen.shopping.cart.model.PriceRule;
 import com.gen.shopping.cart.model.Product;
 import com.gen.shopping.cart.model.Selected;
+import com.gen.shopping.util.PromoFactory;
 
 public class ShoppingCartImpl implements ShoppingCart {
 
@@ -95,36 +97,36 @@ public class ShoppingCartImpl implements ShoppingCart {
 	}
 
 	private void applyPricingRules() {
-		// TODO Auto-generated method stub
-		int unliOneGbCountDivisible = 0;
-		double deduct = 0;
+
 		for (int i = 0; i < selectedItems.size(); i++) {
 
-			if (!selectedItems.get(i).isIgnore()) {
-				double price = Double
-						.valueOf(priceRules.get(selectedItems.get(i).getProduct().getCode()).getProductPrice())
-						.doubleValue();
-				selectedItems.get(i).setTotal(selectedItems.get(i).getCount() * price);
+			Promo promo = PromoFactory.getPromoBusinessLogic("");
+
+			double totalValue = promo.computeTotal(selectedItems.get(i), priceRules);
+
+			if (totalValue > 0) {
+				selectedItems.get(i).setTotal(totalValue);
 			}
-			// }
 
 			if (Constants.UNLI_ONE_GB_NAME.equals(selectedItems.get(i).getProduct().getName())) {
-				unliOneGbCountDivisible = selectedItems.get(i).getCount()
-						/ priceRules.get(selectedItems.get(i).getProduct().getCode()).getDiscountCount();
-				if (unliOneGbCountDivisible > 0) {
-					double price = Double
-							.valueOf(priceRules.get(selectedItems.get(i).getProduct().getCode()).getProductPrice())
-							.doubleValue();
-					deduct = price * unliOneGbCountDivisible;
-					selectedItems.get(i).setTotal(selectedItems.get(i).getTotal() - deduct);
+
+				promo = PromoFactory.getPromoBusinessLogic(Constants.UNLI_ONE_GB_NAME);
+				totalValue = promo.computeTotal(selectedItems.get(i), priceRules);
+
+				if (totalValue > 0) {
+					selectedItems.get(i).setTotal(totalValue);
 				}
+
 			}
 			if (Constants.UNLI_FIVE_GB_NAME.equals(selectedItems.get(i).getProduct().getName())) {
-				int unliFiveGbCount = selectedItems.get(i).getCount();
-				if (unliFiveGbCount > priceRules.get(selectedItems.get(i).getProduct().getCode()).getDiscountCount()) {
-					deduct = unliFiveGbCount * 5;
-					selectedItems.get(i).setTotal(selectedItems.get(i).getTotal() - deduct);
+
+				promo = PromoFactory.getPromoBusinessLogic(Constants.UNLI_FIVE_GB_NAME);
+				totalValue = promo.computeTotal(selectedItems.get(i), priceRules);
+
+				if (totalValue > 0) {
+					selectedItems.get(i).setTotal(totalValue);
 				}
+
 			}
 			if (Constants.UNLI_TWO_GB_NAME.equals(selectedItems.get(i).getProduct().getName())) {
 				int count = selectedItems.get(i).getCount();
