@@ -8,7 +8,7 @@ import com.gen.shopping.cart.bo.Unlimited5GBPromo;
 public class PromoFactory {
  
 	
-	public static Promo getPromoBusinessLogic(String productName)
+	public static Promo createPromoBusinessLogic(String productName)
 	{
 		if(Constants.UNLI_ONE_GB_NAME.equalsIgnoreCase(productName))
 		{

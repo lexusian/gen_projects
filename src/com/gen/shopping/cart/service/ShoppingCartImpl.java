@@ -100,7 +100,7 @@ public class ShoppingCartImpl implements ShoppingCart {
 
 		for (int i = 0; i < selectedItems.size(); i++) {
 
-			Promo promo = PromoFactory.getPromoBusinessLogic("");
+			Promo promo = PromoFactory.createPromoBusinessLogic("");
 
 			double totalValue = promo.computeTotal(selectedItems.get(i), priceRules);
 
@@ -110,7 +110,7 @@ public class ShoppingCartImpl implements ShoppingCart {
 
 			if (Constants.UNLI_ONE_GB_NAME.equals(selectedItems.get(i).getProduct().getName())) {
 
-				promo = PromoFactory.getPromoBusinessLogic(Constants.UNLI_ONE_GB_NAME);
+				promo = PromoFactory.createPromoBusinessLogic(Constants.UNLI_ONE_GB_NAME);
 				totalValue = promo.computeTotal(selectedItems.get(i), priceRules);
 
 				if (totalValue > 0) {
@@ -120,7 +120,7 @@ public class ShoppingCartImpl implements ShoppingCart {
 			}
 			if (Constants.UNLI_FIVE_GB_NAME.equals(selectedItems.get(i).getProduct().getName())) {
 
-				promo = PromoFactory.getPromoBusinessLogic(Constants.UNLI_FIVE_GB_NAME);
+				promo = PromoFactory.createPromoBusinessLogic(Constants.UNLI_FIVE_GB_NAME);
 				totalValue = promo.computeTotal(selectedItems.get(i), priceRules);
 
 				if (totalValue > 0) {
